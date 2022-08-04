@@ -1,10 +1,10 @@
 {
-  "name": "desafio-15-server",
+  "name": "desafio-15",
   "version": "1.0.0",
   "description": "",
-  "main": "config.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon  server.js "
+    "start": "nodemon server.js"
   },
   "type": "module",
   "keywords": [],
@@ -25,7 +25,9 @@
     "normalizr": "^3.6.2",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
+    "pm2": "^5.2.0",
     "socket.io": "^4.5.1",
+    "uuid": "^7.0.3",
     "yargs": "^17.5.1"
   }
 }

@@ -1,4 +1,5 @@
 import { fork } from 'child_process'
+import os from 'os'
 
 const apiControllers = {
     getName: async (req, res) => {
@@ -16,7 +17,8 @@ const apiControllers = {
             memory: process.memoryUsage().rss,
             pathEject: process.execPath,
             id: process.pid,
-            pathProject: process.cwd()
+            pathProject: process.cwd(),
+            processors: os.cpus().length
         })
     },
     getNumbers: (req, res) => {

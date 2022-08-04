@@ -1,4 +1,4 @@
-import express, { json } from 'express';
+import express from 'express';
 // Session
 import { sessionHandler } from './middlewares/session.js';
 // Authentication
@@ -10,14 +10,15 @@ import socketController from './controllers/socketController.js';
 // Routers
 import webRouter from './routers/webRouter.js';
 import apiRouter from './routers/apiRouter.js';
-// Yargs
-import yargsParser from 'yargs/yargs';
+// Args
+import { port } from './parameters/parameters.js';
+// Server
+import initializeServer from './server/initializeServer.js';
 
 // Consts
 const app = express()
 const httpServer = new HttpServer(app)
 const io = new IOServer(httpServer)
-const yargs = yargsParser(process.argv.slice(2))
 
 // Middlewares
 app.use(express.static('./public'))
@@ -33,16 +34,5 @@ app.use('/api', apiRouter)
 
 io.on('connection', socket => socketController(socket, io))
 
-const { port } = yargs
-    .alias({
-        p: 'port'
-    })
-    .default({
-        port: 8080
-    })
-    .argv
-
 //Listen
-const server = httpServer.listen(port, () => {
-    console.log(`Escuchando en el puerto ${server.address().port}`)
-})
+initializeServer(httpServer, port);
